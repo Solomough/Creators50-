@@ -1,4 +1,4 @@
-import { Book, Palette, Lightbulb, Target, Handshake } from "lucide-react";
+import { Book, Palette, Lightbulb, Target, Users } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 const tracks = [
