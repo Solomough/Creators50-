@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Loader2, Sparkles } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface ApplicationFormProps {
   open: boolean;
@@ -29,7 +30,6 @@ export const ApplicationForm = ({ open, onOpenChange }: ApplicationFormProps) =>
     const formData = new FormData(e.currentTarget);
     formData.append("_subject", "New Creators50 Application");
 
-    // Convert FormData → JSON (Formspree best practice)
     const jsonData: any = {};
     formData.forEach((value, key) => {
       jsonData[key] = value;
@@ -38,10 +38,7 @@ export const ApplicationForm = ({ open, onOpenChange }: ApplicationFormProps) =>
     try {
       const response = await fetch("https://formspree.io/f/mnngporv", {
         method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
+        headers: { Accept: "application/json", "Content-Type": "application/json" },
         body: JSON.stringify(jsonData),
       });
 
@@ -49,18 +46,13 @@ export const ApplicationForm = ({ open, onOpenChange }: ApplicationFormProps) =>
         toast.success("Application submitted successfully!", {
           description: "You'll receive an onboarding message via Telegram or WhatsApp soon.",
         });
-
         e.currentTarget.reset();
         onOpenChange(false);
       } else {
-        toast.error("Failed to submit application", {
-          description: "Please try again or contact us directly.",
-        });
+        toast.error("Failed to submit application", { description: "Please try again or contact us directly." });
       }
     } catch (error) {
-      toast.error("Network error", {
-        description: "Please check your connection and try again.",
-      });
+      toast.error("Network error", { description: "Please check your connection and try again." });
     } finally {
       setIsSubmitting(false);
     }
@@ -79,24 +71,18 @@ export const ApplicationForm = ({ open, onOpenChange }: ApplicationFormProps) =>
               <p className="text-sm text-primary font-semibold">Building the Future Now</p>
             </div>
           </div>
-          <DialogDescription className="text-base leading-relaxed pt-4">
+          <p className="text-base leading-relaxed pt-4">
             Welcome to Creators50 — a 50-day virtual journey for 50 young visionaries (ages 15–25) to grow in wisdom, creativity, and digital innovation.
             <br /><br />
             <span className="font-semibold text-foreground">Program Duration:</span> November 21, 2025 – January 10, 2026
             <br />
             <span className="font-semibold text-foreground">Mode:</span> Fully Virtual (Telegram & WhatsApp)
-          </DialogDescription>
+          </p>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-8 pt-6">
-          {/* --- THE REST OF YOUR FORM REMAINS 100% THE SAME --- */}
+          {/* --- THE REST OF YOUR FORM REMAINS THE SAME --- */}
 
-          {/* PERSONAL INFORMATION ... */}
-          {/* VISION & MOTIVATION ... */}
-          {/* COMMITMENT ... */}
-          {/* FINAL QUESTIONS ... */}
-
-          {/* Submit Button */}
           <div className="pt-6 border-t border-border">
             <Button
               type="submit"
