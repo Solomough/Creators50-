@@ -2,11 +2,11 @@ import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "../../utils/cn";
 
-export function Dialog({ children, ...props }) {
+export function Dialog({ children, ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root {...props}>{children}</DialogPrimitive.Root>;
 }
 
-export function DialogTrigger({ children, ...props }) {
+export function DialogTrigger({ children, ...props }: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
   return (
     <DialogPrimitive.Trigger asChild {...props}>
       {children}
@@ -32,13 +32,12 @@ export const DialogContent = React.forwardRef<
     </DialogPrimitive.Content>
   </DialogPrimitive.Portal>
 ));
-
 DialogContent.displayName = "DialogContent";
 
-export const DialogHeader = ({ children, className }) => (
+export const DialogHeader = ({ children, className }: { children: React.ReactNode; className?: string }) => (
   <div className={cn("mb-4", className)}>{children}</div>
 );
 
-export const DialogTitle = ({ children, className }) => (
+export const DialogTitle = ({ children, className }: { children: React.ReactNode; className?: string }) => (
   <h2 className={cn("text-xl font-semibold", className)}>{children}</h2>
 );
